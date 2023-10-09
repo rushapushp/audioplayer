@@ -26,45 +26,47 @@
       <div class="text-gray-300">{{ playlist.music[order].artist }}</div>
     </div>
     <div class="flex flex-row gap-5">
-      <div class="flex flex-col justify-center items-center w-[200px] h-[300px] bg-slate-300">
+      
+        
+        <button
+          class="bg-gradient-to-r from-purple-400 to-blue-400 px-4 py-3  w-[60px] rounded-full h-[50px] "
+          v-on:click="showVolume"
+        >
+        <unicon name="volume" fill="white" />
+        </button>
+        <div id="volumeBox" class="invisible -rotate-90 flex flex-row justify-center items-center px-4 py-2 bg-gray-300 rounded-full absolute z-100 top-[200px] left-[720px] transition-transform">
         <input
           type="range"
-          class="-rotate-90 hidden  flex flex-col justify-center items-center"
+          
           id="volumeSlider"
           v-on:change="changeVolume"
         />
-
-        <button
-          class="bg-red-100 px-4 py-3 hover:bg-red-300 w-[60px] rounded-full h-[50px]"
-          v-on:click="showVolume"
-        >
-          vol
-        </button>
       </div>
 
       <button
-        class="bg-red-100 px-4 py-3 hover:bg-red-300 w-[60px] h-[50px] rounded-full flex-col items-center"
+        class="bg-gradient-to-r from-purple-400 to-blue-400 px-4 py-3 w-[60px] h-[50px] rounded-full flex-col items-center"
         v-on:click="setPrev"
       >
-        prev
+      <unicon name="previous" fill="white" />
       </button>
       <button
-        class="bg-green-100 px-4 py-3 hover:bg-green-300 w-[60px] h-[50px] rounded-full flex-col items-center"
+        class="bg-gradient-to-r from-purple-400 to-blue-400 px-4 py-3 w-[60px] h-[50px] rounded-full flex-col items-center"
         v-on:click="toggleAudio"
       >
-        {{ isPlaying ? "Pause" : "Play" }}
+      <unicon :name=" isPlaying ? 'pause-circle' : 'play-circle' " fill="white" />
+        
       </button>
       <button
-        class="bg-red-100 px-4 py-3 hover:bg-red-300 w-[60px] h-[50px] rounded-full flex-col items-center"
+        class="bg-gradient-to-r from-purple-400 to-blue-400 px-4 py-3 w-[60px] h-[50px] rounded-full flex-col items-center"
         v-on:click="setNext"
       >
-        next
+      <unicon name="step-forward" fill="white" />
       </button>
       <button
-        class="bg-red-100 px-4 py-3 hover:bg-red-300 w-[60px] h-[50px] rounded-full flex-col items-center"
+        class="bg-gradient-to-r from-purple-400 to-blue-400 px-4 py-3 w-[60px] h-[50px] rounded-full flex-col items-center"
         v-on:click="muteVolume"
       >
-        {{ isMuted ? "unmute" : "mute" }}
+      <unicon :name=" isMuted ? 'volume-off' : 'volume-mute' " :fill="isMuted ? 'green' : 'red' " />
       </button>
     </div>
   </div>
@@ -93,10 +95,10 @@
       showVolume() {
         if (this.volumeIsVisible == false) {
           (this.volumeIsVisible = true),
-            (document.getElementById("volumeSlider").style.display = "flex");
+            (document.getElementById("volumeBox").style.visibility = "visible");
         } else {
           (this.volumeIsVisible = false),
-            (document.getElementById("volumeSlider").style.display = "none");
+            (document.getElementById("volumeBox").style.visibility = "hidden");
         }
       },
 
